@@ -8,4 +8,6 @@ declare module "nativescript-clipboard" {
    * Gets any currently present text from the clipboard.
    */
   export function getText(): Promise<string>;
+
+  export function addPrimaryClipChangedListener(onPrimaryClipChanged: (data: string) => void): Promise<any>;
 }

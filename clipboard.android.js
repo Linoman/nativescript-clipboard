@@ -43,3 +43,20 @@ exports.getText = function () {
     }
   });
 };
+
+exports.addPrimaryClipChangedListener = function(callback) {
+  return new Promise(function (resolve, reject) {
+    try {
+      var clipboard = getContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+      clipboard.addPrimaryClipChangedListener(new android.content.ClipboardManager.OnPrimaryClipChangedListener({
+        onPrimaryClipChanged: function() {
+          callback()
+        }
+      }));
+      resolve();
+    } catch (ex) {
+      console.error("Error in clipboard.setListener: " + ex);
+      reject(ex);
+    }
+  });
+}
